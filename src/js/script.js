@@ -61,6 +61,8 @@ const select = {
 
       thisProduct.renderInMenu();
 
+      //thisProduct.getElements();
+
       thisProduct.initAccordion();
 
       console.log('new product:', thisProduct);
@@ -77,6 +79,15 @@ const select = {
       menuContainer.appendChild(thisProduct.element);
       // add element to menu
     }
+    /*getElements(){
+      const thisProduct = this;
+    
+      thisProduct.accordionTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
+      thisProduct.form = thisProduct.element.querySelector(select.menuProduct.form);
+      thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
+      thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
+      thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
+    };*/
 
     initAccordion(){
       const thisProduct = this;
@@ -91,9 +102,11 @@ const select = {
         event.preventDefault();
         //prevent default action on event
         const activeProduct = document.querySelector('.product.active');
-        //console.log('activeProduct', activeProduct);
-        //console.log('this', thisProduct);
+        console.log('activeProduct', activeProduct);
+        console.log('this', thisProduct);
         //find active product (product that has active class)
+        thisProduct.element.classList.toggle("active");
+        //toggle active class on thisProduct.element
 
         if(activeProduct == null){
           //console.log('variable is null');
@@ -102,12 +115,8 @@ const select = {
           //console.log('removed!');
         }
         //if there is active product and its not thisProduct.element, remove class active from it
-        
-        thisProduct.element.classList.toggle("active");
-        //toggle active class on thisProduct.element
-      
       });
-  }
+  };
 };
 
 
