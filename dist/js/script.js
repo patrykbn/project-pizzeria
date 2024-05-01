@@ -189,8 +189,6 @@ const select = {
             //console.log('price of option', option.price);
           }
         }
-          
-        
       }
     }
     console.log('new price', price);
