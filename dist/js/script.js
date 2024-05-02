@@ -96,6 +96,8 @@ const select = {
       console.log('cartButton', thisProduct.cartButton);
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
       console.log('priceElem', thisProduct.priceElem);
+      thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
+      console.log('imageWrapper', thisProduct.imageWrapper);
     }
 
     initAccordion(){
@@ -153,7 +155,7 @@ const select = {
 
   // covert form to object structure e.g. { sauce: ['tomato'], toppings: ['olives', 'redPeppers']}
   const formData = utils.serializeFormToObject(thisProduct.form);
-  console.log('formData', formData);
+  //console.log('formData', formData);
 
   // set price to default price
   let price = thisProduct.data.price;
@@ -172,10 +174,19 @@ const select = {
       //console.log(optionId, option);
       //console.log('test', formData[paramId]);
       //console.log('test2', option['default']);
-      if(formData[paramId] && formData[paramId].includes(optionId)){
+      const optionImage = thisProduct.imageWrapper.querySelector('.' + paramId + '-' + optionId);
+      console.log('optionImage', optionImage);
+      const optionSelected = formData[paramId] && formData[paramId].includes(optionId);
+
+      if(optionSelected){
         //console.log('this option is included');
         //check if the option is not default
-        
+        if(optionImage){
+          console.log('image found!')
+          if(optionSelected){
+            optionImage.classList.add(classNames.menuProduct.imageVisible);
+          }
+        }
         if(!option.default){
           //console.log('nie zawiera default');
           //console.log('price of option', option.price);
@@ -183,6 +194,9 @@ const select = {
           //console.log('new price', price);
         } 
       } else {
+        if(optionImage){
+          optionImage.classList.remove(classNames.menuProduct.imageVisible);
+        }
           if(option.default){
             //console.log('zawiera default');
             price = price - option.price;
@@ -191,7 +205,7 @@ const select = {
         }
       }
     }
-    console.log('new price', price);
+    //console.log('new price', price);
 
   // update calculated price in the HTML
   thisProduct.priceElem.innerHTML = price;
