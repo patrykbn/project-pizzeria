@@ -67,6 +67,8 @@ const select = {
 
       thisProduct.initOrderForm();
 
+      thisProduct.initAmountWidget();
+
       thisProduct.processOrder();
 
       console.log('new product:', thisProduct);
@@ -87,17 +89,18 @@ const select = {
       const thisProduct = this;
     
       thisProduct.accordionTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
-      console.log('accordionTrigger', thisProduct.accordionTrigger);
+      //console.log('accordionTrigger', thisProduct.accordionTrigger);
       thisProduct.form = thisProduct.element.querySelector(select.menuProduct.form);
-      console.log('form', thisProduct.form);
+      //console.log('form', thisProduct.form);
       thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
-      console.log('allformInputs', thisProduct.formInputs);
+      //console.log('allformInputs', thisProduct.formInputs);
       thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
-      console.log('cartButton', thisProduct.cartButton);
+      //console.log('cartButton', thisProduct.cartButton);
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
-      console.log('priceElem', thisProduct.priceElem);
+      //console.log('priceElem', thisProduct.priceElem);
       thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
-      console.log('imageWrapper', thisProduct.imageWrapper);
+      //console.log('imageWrapper', thisProduct.imageWrapper);
+      thisProduct.amountWidgetElem = thisProduct.element.querySelector(select.menuProduct.amountWidget);
     }
 
     initAccordion(){
@@ -127,11 +130,11 @@ const select = {
         }
         //if there is active product and its not thisProduct.element, remove class active from it
       });
-  }
+    }
 
-  initOrderForm(){
+    initOrderForm(){
     const thisProduct = this;
-    console.log('initOrderForm');
+    //console.log('initOrderForm');
 
     thisProduct.form.addEventListener('submit', function(event){
       event.preventDefault();
@@ -148,9 +151,9 @@ const select = {
       event.preventDefault();
       thisProduct.processOrder();
     });
-  }
+    }
 
-  processOrder(){
+    processOrder(){
     const thisProduct = this;
 
   // covert form to object structure e.g. { sauce: ['tomato'], toppings: ['olives', 'redPeppers']}
@@ -175,14 +178,14 @@ const select = {
       //console.log('test', formData[paramId]);
       //console.log('test2', option['default']);
       const optionImage = thisProduct.imageWrapper.querySelector('.' + paramId + '-' + optionId);
-      console.log('optionImage', optionImage);
+      //console.log('optionImage', optionImage);
       const optionSelected = formData[paramId] && formData[paramId].includes(optionId);
 
       if(optionSelected){
         //console.log('this option is included');
         //check if the option is not default
         if(optionImage){
-          console.log('image found!')
+          //console.log('image found!')
           if(optionSelected){
             optionImage.classList.add(classNames.menuProduct.imageVisible);
           }
@@ -206,15 +209,82 @@ const select = {
       }
     }
     //console.log('new price', price);
-
+  price *= thisProduct.amountWidget.value;
   // update calculated price in the HTML
   thisProduct.priceElem.innerHTML = price;
-}
+    }
+
+    initAmountWidget(){
+      const thisProduct = this;
+
+      thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
+      thisProduct.amountWidgetElem.addEventListener('Updated' , function(){
+        thisProduct.processOrder();
+      });
+    }
 
 }
+  class AmountWidget{
+    constructor(element){
+      const thisWidget = this;
 
+      console.log('AmountWidget:' , thisWidget);
+      console.log('constructor arguments:' , element);
 
+      thisWidget.getElements(element);
+      thisWidget.setValue(thisWidget.input.value);
+      thisWidget.initActions();
+    }
+    getElements(element){
+      const thisWidget = this;
 
+      thisWidget.element = element;
+      thisWidget.input = thisWidget.element.querySelector(select.widgets.amount.input);
+      thisWidget.linkDecrease = thisWidget.element.querySelector(select.widgets.amount.linkDecrease);
+      thisWidget.linkIncrease = thisWidget.element.querySelector(select.widgets.amount.linkIncrease);
+    }
+    setValue(value){
+      const thisWidget = this;
+      if(!thisWidget.input.value){
+        thisWidget.input.value = parseInt(settings.amountWidget.defaultValue);
+        value = parseInt(settings.amountWidget.defaultValue);
+      }
+      const newValue = parseInt(value);
+      console.log('newValue', newValue);
+      //TODO: add validation
+      if(thisWidget.value !== newValue && !isNaN(newValue) && newValue >= parseInt(settings.amountWidget.defaultMin) && newValue <= parseInt(settings.amountWidget.defaultMax)) {
+        thisWidget.value = newValue;
+        //console.log('opcja2', newValue);
+        thisWidget.announce(value);
+      }
+      //console.log('opcja3', thisWidget.value);
+      thisWidget.input.value = thisWidget.value;
+    }
+    
+    announce(){
+      const thisWidget = this;
+
+      const event = new Event('Updated');
+      thisWidget.element.dispatchEvent(event);
+      //console.log('dziala');
+    }
+
+    initActions(){
+      
+      const thisWidget = this;
+      thisWidget.input.addEventListener('change' , function(){
+        thisWidget.setValue(this.value);
+      });
+      thisWidget.linkDecrease.addEventListener('click' , function(){
+        const newValue = thisWidget.value -1;
+        thisWidget.setValue(newValue)
+      });
+      thisWidget.linkIncrease.addEventListener('click' , function(){
+        const newValue = thisWidget.value +1;
+        thisWidget.setValue(newValue)
+      });
+    }
+  }
   const app = {
     initMenu: function(){
       const thisApp = this;
