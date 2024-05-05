@@ -277,7 +277,7 @@ const select = {
       };
       console.log('productSummary', productSummary);
       return productSummary;
-    };
+    }
     addToCart(){
       const thisProduct = this;
       const productSummary = thisProduct.prepareCartProduct();
@@ -304,9 +304,7 @@ const select = {
         const optionSelected = formData[paramId] && formData[paramId].includes(optionId);
         //console.log('optionSelected', optionSelected);
         if(optionSelected){
-          params[paramId].options[optionId] = {
-            options: option.label,
-          }
+          params[paramId].options[optionId] = option.label
             }
           }
         }
@@ -417,7 +415,8 @@ const select = {
       const generatedHTML = templates.cartProduct(cartProduct);
       // generate HTML based on template
       const generatedDOM = utils.createDOMFromHTML(generatedHTML);
-      console.log('generatedDOM', generatedDOM)
+      //console.log('generatedHTML', generatedHTML)
+      //console.log('generatedDOM', generatedDOM)
       // create element using utils.createElementFromHTML
       const cartContainer = thisCart.dom.productList;
       // find menu container
