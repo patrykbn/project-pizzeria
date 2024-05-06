@@ -258,7 +258,7 @@ const select = {
       const thisProduct = this;
 
       thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
-      thisProduct.amountWidgetElem.addEventListener('Updated' , function(){
+      thisProduct.amountWidgetElem.addEventListener('updated' , function(){
         thisProduct.processOrder();
       });
     }
@@ -353,7 +353,7 @@ const select = {
     announce(){
       const thisWidget = this;
 
-      const event = new CustomEvent('Updated', {
+      const event = new CustomEvent('updated', {
         bubbles: true
       });
       thisWidget.element.dispatchEvent(event);
@@ -417,6 +417,10 @@ const select = {
       thisCart.dom.productList.addEventListener('updated', function(){
         thisCart.update();
       });
+      thisCart.dom.productList.addEventListener('remove' , function(){
+        console.log('działa listener remove');
+        thisCart.remove(event.detail.cartProduct);
+      })
     }
 
     add(menuProduct){
@@ -437,6 +441,7 @@ const select = {
       thisCart.products.push(new CartProduct(menuProduct, generatedDOM));
       //console.log('thisCart.products', thisCart.products);
       thisCart.update();
+      console.log('thisCart.products' , thisCart.products);
      }
     update(){
       const thisCart = this;
@@ -470,7 +475,13 @@ const select = {
         console.log('thisCart.dom.totalPrice', thisCart.dom.totalPrice);
         console.log('thisCart.dom.totalNumber', thisCart.dom.totalNumber);
     }
-
+    remove(element){
+      const thisCart = this;
+      console.log('element' , element);
+      console.log('thisCart.products' , thisCart.products);
+      //const indexOfProduct = thisCart.products.indexof(element);
+      //console.log('indexOfProduct' , indexOfProduct);
+    }
   }
 
   class CartProduct {
@@ -487,7 +498,8 @@ const select = {
       
       thisCartProduct.getElements(element);
       console.log('thisCartProduct', thisCartProduct);
-      thisCartProduct.initAmountWidget()
+      thisCartProduct.initAmountWidget();
+      thisCartProduct.initActions();
     }
 
     getElements(element){
@@ -505,7 +517,7 @@ const select = {
       const thisCartProduct = this;
 
       thisCartProduct.amountWidget = new AmountWidget(thisCartProduct.dom.amountWidget);
-      thisCartProduct.dom.amountWidget.addEventListener('Updated' , function(){
+      thisCartProduct.dom.amountWidget.addEventListener('updated' , function(){
 
         //console.log('działa widget w CartProduct', thisCartProduct.dom.amountWidget);
         //console.log('ilosc sztuk w cartProduct', thisCartProduct.amountWidget);
@@ -520,6 +532,31 @@ const select = {
       });
 
       //console.log('check', thisCartProduct.dom.price);
+  }
+
+  remove(){
+    const thisCartProduct = this;
+
+    const event = new CustomEvent('remove', {
+      bubbles: true,
+      detail: {
+        cartProduct: thisCartProduct,
+      },
+    });
+
+    thisCartProduct.dom.wrapper.dispatchEvent(event);
+    console.log('dziala remove');
+  };
+
+  initActions(){
+    const thisCartProduct = this;
+    thisCartProduct.dom.edit.addEventListener('click' , function(event){
+      event.preventDefault();
+    });
+    thisCartProduct.dom.remove.addEventListener('click' , function(event){
+      event.preventDefault();
+      thisCartProduct.remove();
+    });
   }
 }
   const app = {
