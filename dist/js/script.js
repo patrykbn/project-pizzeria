@@ -397,16 +397,17 @@ const select = {
       thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger);
       //console.log('dziala' , thisCart.dom.toggleTrigger);
       thisCart.dom.productList = thisCart.dom.wrapper.querySelector(select.cart.productList);
+      
       //console.log('sprawdzenie22' , thisCart.dom.productList);
       //console.log('thisCart.dom' , thisCart.dom)
       thisCart.dom.deliveryFee = thisCart.dom.wrapper.querySelector(select.cart.deliveryFee);
-      console.log('thisCart.dom.deliveryFee', thisCart.dom.deliveryFee)
+      //console.log('thisCart.dom.deliveryFee', thisCart.dom.deliveryFee)
       thisCart.dom.subtotalPrice = thisCart.dom.wrapper.querySelector(select.cart.subtotalPrice);
-      console.log('thisCart.dom.subtotalPrice', thisCart.dom.subtotalPrice)
+      //console.log('thisCart.dom.subtotalPrice', thisCart.dom.subtotalPrice)
       thisCart.dom.totalPrice = thisCart.dom.wrapper.querySelectorAll(select.cart.totalPrice);
-      console.log('thisCart.dom.totalPrice', thisCart.dom.totalPrice)
+      //console.log('thisCart.dom.totalPrice', thisCart.dom.totalPrice)
       thisCart.dom.totalNumber = thisCart.dom.wrapper.querySelector(select.cart.totalNumber);
-      console.log('thisCart.dom.totalNumber', thisCart.dom.totalNumber)
+      //console.log('thisCart.dom.totalNumber', thisCart.dom.totalNumber)
     }
 
     initActions(){
@@ -418,8 +419,10 @@ const select = {
         thisCart.update();
       });
       thisCart.dom.productList.addEventListener('remove' , function(){
-        console.log('działa listener remove');
-        thisCart.remove(event.detail.cartProduct);
+        //console.log('działa listener remove', event.detail.cartProduct);
+        const indexOfProduct = thisCart.products.indexOf(event.detail.cartProduct);
+        //console.log('indexOfProduct' ,indexOfProduct)
+        thisCart.remove(indexOfProduct);
       })
     }
 
@@ -434,6 +437,7 @@ const select = {
       //console.log('generatedDOM', generatedDOM)
       // create element using utils.createElementFromHTML
       const cartContainer = thisCart.dom.productList;
+      //console.log('thisCart.products' ,thisCart.products)
       // find menu container
       cartContainer.appendChild(generatedDOM);
       // add element to menu
@@ -441,17 +445,17 @@ const select = {
       thisCart.products.push(new CartProduct(menuProduct, generatedDOM));
       //console.log('thisCart.products', thisCart.products);
       thisCart.update();
-      console.log('thisCart.products' , thisCart.products);
+      //console.log('thisCart.products' , thisCart.products);
      }
     update(){
       const thisCart = this;
       const deliveryFee = settings.cart.defaultDeliveryFee;
-      console.log('deliveryFee' , deliveryFee);
+      //console.log('deliveryFee' , deliveryFee);
       let totalNumber = 0;
       let subtotalPrice = 0;
-      console.log('thisCart.products', thisCart.products);
+      //console.log('thisCart.products', thisCart.products);
       for(let product of thisCart.products){
-        console.log('product', product);
+        //console.log('product', product);
         totalNumber += parseInt(product.amount);
         subtotalPrice += parseInt(product.price);
       }
@@ -460,9 +464,9 @@ const select = {
       } else{
         thisCart.totalPrice= 0;
       }
-        console.log('totalNumber', totalNumber);
-        console.log('subtotalPrice', subtotalPrice);
-        console.log('thisCart.totalPrice' , thisCart.totalPrice);
+        //console.log('totalNumber', totalNumber);
+        //console.log('subtotalPrice', subtotalPrice);
+        //console.log('thisCart.totalPrice' , thisCart.totalPrice);
         thisCart.dom.deliveryFee.innerHTML = deliveryFee;
         thisCart.dom.subtotalPrice.innerHTML = subtotalPrice;
         thisCart.dom.totalPrice.forEach(element => {
@@ -470,17 +474,24 @@ const select = {
           //element = thisCart.totalPrice;
         });
         thisCart.dom.totalNumber.innerHTML = totalNumber;
-        console.log('thisCart.dom.deliveryFee', thisCart.dom.deliveryFee);
-        console.log('thisCart.dom.subtotalPrice', thisCart.dom.subtotalPrice);
-        console.log('thisCart.dom.totalPrice', thisCart.dom.totalPrice);
-        console.log('thisCart.dom.totalNumber', thisCart.dom.totalNumber);
+        //console.log('thisCart.dom.deliveryFee', thisCart.dom.deliveryFee);
+        //console.log('thisCart.dom.subtotalPrice', thisCart.dom.subtotalPrice);
+        //console.log('thisCart.dom.totalPrice', thisCart.dom.totalPrice);
+        //console.log('thisCart.dom.totalNumber', thisCart.dom.totalNumber);
     }
-    remove(element){
+    remove(index){
       const thisCart = this;
-      console.log('element' , element);
+      console.log('index' , index);
       console.log('thisCart.products' , thisCart.products);
-      //const indexOfProduct = thisCart.products.indexof(element);
-      //console.log('indexOfProduct' , indexOfProduct);
+      thisCart.products.splice(index, 1);
+      console.log('thisCart.products' , thisCart.products);
+      console.log('thisCart.dom.productList', thisCart.dom.productList);
+      let liElements = document.querySelectorAll('ul.cart__order-summary.no-spacing > li');
+      let liElementToRemove = liElements[index];
+      console.log('liElementToRemove', liElementToRemove);
+      liElementToRemove.parentNode.removeChild(liElementToRemove);
+      console.log('thisCart.dom.productList', thisCart.dom.productList);
+      thisCart.update();
     }
   }
 
@@ -546,7 +557,7 @@ const select = {
 
     thisCartProduct.dom.wrapper.dispatchEvent(event);
     console.log('dziala remove');
-  };
+  }
 
   initActions(){
     const thisCartProduct = this;
@@ -556,6 +567,8 @@ const select = {
     thisCartProduct.dom.remove.addEventListener('click' , function(event){
       event.preventDefault();
       thisCartProduct.remove();
+      //const indexOfRemove = thisCartProduct.indexOf(select.cartProduct.remove);
+      
     });
   }
 }
