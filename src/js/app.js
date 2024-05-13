@@ -1,6 +1,6 @@
   import {settings, select} from './settings.js';
   import Product from './components/product.js';
-  import cart from './components.cart.js'
+  import cart from './components/cart.js';
   const app = {
     initMenu: function(){
       const thisApp = this;
