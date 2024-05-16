@@ -29,8 +29,8 @@ export const select = {
         linkDecrease: 'a[href="#less"]',
         linkIncrease: 'a[href="#more"]',
       },
-      dataPicker: {
-        wrapper: '.data-picker',
+      datePicker: {
+        wrapper: '.date-picker',
         input: 'input[name="date"]'
       },
       hourPicker: {
