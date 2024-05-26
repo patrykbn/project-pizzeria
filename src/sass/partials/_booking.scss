@@ -198,3 +198,9 @@
     @include flex(row, flex-start, space-between);
     margin: ($base-size * 4) auto;
   }
+
+  .object.picked {
+    border: solid 2px green;
+    background: rgb(131, 190, 139);
+    z-index: 9999;
+  }
