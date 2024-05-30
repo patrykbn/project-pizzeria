@@ -1,4 +1,4 @@
-import { settings } from "/js/settings.js";
+import { settings } from "../settings.js";
 class BaseWidget{
     constructor(wrapperElement, initialValue){
         const thisWidget = this;

@@ -1,8 +1,8 @@
-import { templates, select , settings, classNames} from "/js/settings.js";
+import { templates, select , settings, classNames} from "../settings.js";
 import AmountWidget from './amountWidget.js';
 import DatePicker from "./DatePicker.js";
 import HourPicker from "./HourPicker.js";
-import utils from "/js/utils.js"
+import utils from "../utils.js"
 
 
 class Booking {

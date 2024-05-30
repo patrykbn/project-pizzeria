@@ -1,5 +1,5 @@
-import {select, settings} from '/js/settings.js';
-import BaseWidget from '/js/components/baseWidget.js';
+import {select, settings} from '../settings.js';
+import BaseWidget from './baseWidget.js';
 class AmountWidget extends BaseWidget{
     constructor(element){
       super(element, parseInt(settings.amountWidget.defaultValue));

@@ -1,6 +1,6 @@
-import BaseWidget from '/js/components/BaseWidget.js';
-import utils from '/js/utils.js';
-import {select, settings} from '/js/settings.js';
+import BaseWidget from './baseWidget.js';
+import utils from '../utils.js';
+import {select, settings} from '../settings.js';
 
 class DatePicker extends BaseWidget{
   constructor(wrapper){

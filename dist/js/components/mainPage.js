@@ -1,4 +1,4 @@
-import {templates, settings} from "/js/settings.js";
+import {templates, settings} from "../settings.js";
 //import Flickity from "/vendor/flickity.pkgd.js";
 
 class mainPage{
