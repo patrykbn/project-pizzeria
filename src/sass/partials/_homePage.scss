@@ -1,0 +1,230 @@
+$mainColor: white;
+$mainFontSize: 25px;
+$secondaryFontSize: 15px;
+$mainFontStyle: "Oswald", sans-serif;
+$secondaryFontStyle: "Lato", sans-serif;
+
+.mainInfo {
+  margin-top: 50px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.mainButton {
+  flex: 1 1 50%;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.mainButton .topIMG {
+  position: absolute;
+  object-fit: cover;
+  overflow: hidden;
+  width: 100%;
+  height: 150px;
+  z-index: 1;
+  border-radius: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.mainButton .mainLink {
+  font-family: $mainFontStyle;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: $mainColor;
+  z-index: 9999999;
+  text-decoration: none;
+  font-size: $mainFontSize;
+  transition: top 0.3s ease;
+  white-space: nowrap;
+}
+
+.mainButton .secondaryText {
+  position: absolute;
+  bottom: -20%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: $mainColor;
+  z-index: 9999999;
+  font-size: $secondaryFontSize;
+  opacity: 0;
+  transition: bottom 1.3s ease, opacity 0.7s ease;
+  white-space: nowrap;
+}
+
+.mainButton:hover .secondaryText {
+  bottom: 30px;
+  opacity: 1;
+}
+
+.mainButton:hover .mainLink {
+    top: 40%;
+}
+
+.secondaryInfo{
+    flex: 1 1 100%;
+    text-align: center;
+    margin-top: 10px;
+    background-color: rgb(236, 88, 88);
+    border-radius: 10px;
+    height: 150px;
+    justify-content: center;
+    align-items: center;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 40px;
+}
+
+.mainText{
+    font-family: $mainFontStyle;
+    font-size: $mainFontSize;
+    color: $mainColor;
+    margin-top: 40px;
+    margin-bottom: -15px;
+}
+
+.subtext{
+    color: $mainColor;
+    font-weight: 200;
+}
+
+.review{
+    height: 300px;
+    width: 660px;
+    //background-color: pink;
+    display: flex;
+    padding: 15px;
+    justify-content: center;
+    align-items: center;
+}
+
+.reviewImage{
+  //height: 80px;
+  //width: 80px;
+  margin-right: 20px;
+}
+.reviewIMG{
+  object-fit: cover;
+  overflow: hidden;
+  border-radius: 10px;
+  height: 200px;
+  width: 200px;
+}
+
+.reviewTitle{
+  font-family: $mainFontStyle;
+  font-size: $mainFontSize;
+  font-weight: 400;
+}
+
+.reviewText{
+  font-family: $secondaryFontStyle;
+  font-size: $secondaryFontSize;
+  font-weight: 200;
+}
+
+.reviewAuthor{
+  font-style: italic;
+  font-weight: 300;
+}
+
+.gallery{
+    margin-top: 60px;
+}
+
+.galleryContainer{
+  display: flex;
+  height: 430px;
+  //background-color: red;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.galleryImage{
+  position: relative;
+  flex: 0 1 calc(33.33% - 10px);
+  margin: 5px;
+  box-sizing: border-box;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+
+  &:hover::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 200px;
+    background-color: rgba(0, 0, 0, 0.35);
+    z-index: 2;
+    border-radius: 10px;
+  }
+}
+
+.galleryIMG{
+  position: absolute;
+  object-fit: cover;
+  overflow: hidden; 
+  border-radius: 10px;
+  height: 200px;
+  width: 100%;
+  border-radius: 10px;
+  z-index: 1;
+}
+
+.links{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 1s;
+}
+.galleryLink{
+    color: white;
+    font-size: 25px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.galleryImage:hover .links{
+    z-index: 3;
+    opacity: 1;
+}
+
+.linkHeart{
+    transition: color 1s, font-size 1s ;
+}
+
+.linkHeart:hover{
+    color: red;
+    font-size: 30px;
+}
+
+.linkShare{
+    transition: color 1s, font-size 1s ;
+}
+
+.linkShare:hover{
+    color: rgb(221, 118, 0);
+    font-size: 30px;
+}
+
+.instagramLink{
+    margin-top: 25px;
+    margin-bottom: 15px;
+}
+
+footer{
+    height: 100px;
+}

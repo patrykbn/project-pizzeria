@@ -207,6 +207,56 @@
 
     ],
 
+    "homePage":[
+      {
+         "orderImage": "<img class=\"topIMG\" src=\"images/pizzeriaHome/pizza-1.jpg\">",
+         "bookingImage": "<img class=\"topIMG\" src=\"images/pizzeriaHome/pizza-2.jpg\">",
+         "orderSubtext": "Delicous food delivered to your door!",
+         "bookingSubtext": "Find and book a table at our restaurant",
+         "openingHours": "TUE-SUN, 12PM-12AM",
+         "reviews":[
+            {
+               "reviewIMG": "<img class=\"reviewIMG\" src=\"images/pizzeriaHome/pizza-3.jpg\">",
+               "reviewTitle": "Great restaurant!",
+               "reviewText": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla viverra pretium neque. Sed eu ultricies nisi. Cras in vehicula urna. Cras sed scelerisque tortor. Nulla condimentum est mauris, nec ullamcorper.",
+               "reviewAuthor": "Bridget Jones"
+            },
+            {
+               "reviewIMG": "<img class=\"reviewIMG\" src=\"images/pizzeriaHome/pizza-3.jpg\">",
+               "reviewTitle": "Loved the food",
+               "reviewText": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla viverra pretium neque. Sed eu ultricies nisi. Cras in vehicula urna. Cras sed scelerisque tortor. Nulla condimentum est mauris, nec ullamcorper.",
+               "reviewAuthor": "Zach Wazowski"
+            },
+            {
+               "reviewIMG": "<img class=\"reviewIMG\" src=\"images/pizzeriaHome/pizza-3.jpg\">",
+               "reviewTitle": "The wine was perfect",
+               "reviewText": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla viverra pretium neque. Sed eu ultricies nisi. Cras in vehicula urna. Cras sed scelerisque tortor. Nulla condimentum est mauris, nec ullamcorper.",
+               "reviewAuthor": "Jack Sparrow"
+            }
+         ],
+         "gallery":[
+            {
+               "galleryIMG": "<img class=\"galleryIMG\" src=\"images/pizzeriaHome/pizza-4.jpg\">"
+            },
+            {
+               "galleryIMG": "<img class=\"galleryIMG\" src=\"images/pizzeriaHome/pizza-5.jpg\">"
+            },
+            {
+               "galleryIMG": "<img class=\"galleryIMG\" src=\"images/pizzeriaHome/pizza-6.jpg\">"
+            },
+            {
+               "galleryIMG": "<img class=\"galleryIMG\" src=\"images/pizzeriaHome/pizza-7.jpg\">"
+            },
+            {
+               "galleryIMG": "<img class=\"galleryIMG\" src=\"images/pizzeriaHome/pizza-8.jpg\">"
+            },
+            {
+               "galleryIMG": "<img class=\"galleryIMG\" src=\"images/pizzeriaHome/pizza-9.jpg\">"
+            }
+         ]
+      }
+    ],
+
     "events": [
       {
         "id": 1,
